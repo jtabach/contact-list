@@ -5,3 +5,20 @@
 #editContact {
 	display: none;
 }
+
+a {
+	cursor: pointer;
+	
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.delete {
+	color: #990000;
+}
+
+.edit {
+	color: #008800;
+}

@@ -35,7 +35,7 @@
 		  </div>
 		  <div class="form-group">
 		    <div class="col-sm-offset-2 col-sm-10">
-		      <button id="addContact" type="submit" class="btn btn-default">Add Contanct</button>
+		      <button id="addContact" type="submit" class="btn btn-default">Add Contact</button>
 		      <button id="editContact" type="submit" class="btn btn-success">Edit Complete</button>
 		    </div>
 		  </div>
@@ -44,10 +44,10 @@
 			<table class="table table-condensed">
 				<thead>
 				  <tr>
-				  	<th class="col-sm-2">Name</th>
-				  	<th class="col-sm-2">Phone</th>
-				  	<th class="col-sm-3">Email</th>
-				  	<th class="col-sm-3">Address</th>
+				  	<th class="col-sm-2 sort" data-sortby="name">Name V</th>
+				  	<th class="col-sm-2 sort" data-sortby="tel">Phone</th>
+				  	<th class="col-sm-3 sort" data-sortby="email">Email</th>
+				  	<th class="col-sm-3 sort" data-sortby="address">Address</th>
 				  	<th class="col-sm-1">Edit</th>
 				  	<th class="col-sm-1">Delete</th>
 				  </tr>
@@ -73,6 +73,7 @@
 
 	<script src="https://code.jquery.com/jquery-2.2.0.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.0.0/lodash.min.js"></script>
 	<script src="main.js"></script>
 </body>
 </html>

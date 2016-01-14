@@ -3,6 +3,7 @@
 $(document).ready(init);
 
 var contacts = [];
+var editInProgress = false;
 
 function init() {
 	initializeLocalStorage();
@@ -10,6 +11,7 @@ function init() {
 	$('form').submit(addContact);
 	$('#contactList').on('click', '.delete', deleteContact);
 	$('#contactList').on('click', '.edit', editContact);
+	$('.sort').on('dblclick', sortContacts);
 }
 
 function initializeLocalStorage() {
@@ -38,10 +40,10 @@ function updateContactList() {
 function addContact(e) {
 	e.preventDefault();
 	var newContact = {
-		name: $('#name').val(),
+		name: _.upperFirst($('#name').val()),
 		tel: $('#tel').val(),
-		email: $('#email').val(),
-		address: $('#address').val()
+		email: _.lowerFirst($('#email').val()),
+		address: _.upperFirst($('#address').val())
 	}
 	addData(newContact);
 }
@@ -52,30 +54,39 @@ function addData(newContact) {
 	stringifyContacts();
 	$('#addContact').show(); // Toggle buttons
 	$('#editContact').hide();
-	// $('#contactList').append($tr);
+	editInProgress = false;
+	$('form').trigger('reset');
 }
 
 function deleteContact() {
-	spliceContact();
-	updateContactList();
-	stringifyContacts();
+	if (!editInProgress) { // Don't allow delete while edit in progress
+		var index = $(this).closest('tr').index();
+		spliceContact(index);
+		updateContactList();
+		stringifyContacts();
+	}
 }
 
 function editContact() {
-	var $this = $(this);
-	var $editRow = $this.closest('tr').remove();
-	var $rowChildren = $editRow.children();
-	$('#name').val($rowChildren.eq(0).text());
-	$('#tel').val($rowChildren.eq(1).text());
-	$('#email').val($rowChildren.eq(2).text());
-	$('#address').val($rowChildren.eq(3).text());
-	$('#addContact').hide(); // Toggle buttons
-	$('#editContact').show();
-	spliceContact();
+	if (!editInProgress) { // Don't allow multiple edits when one in progress
+		var $this = $(this);
+		var index = $(this).closest('tr').index();
+		var $editRow = $this.closest('tr').remove();
+		spliceContact(index);
+		var $rowChildren = $editRow.children();
+		$('#name').val($rowChildren.eq(0).text());
+		$('#tel').val($rowChildren.eq(1).text());
+		$('#email').val($rowChildren.eq(2).text());
+		$('#address').val($rowChildren.eq(3).text());
+		$('#addContact').hide(); // Toggle buttons
+		$('#editContact').show();
+		updateContactList();
+		stringifyContacts();
+		editInProgress = true;
+	}
 }
 
 function spliceContact(index) {
-	var index = $(this).closest('tr').index();
 	contacts.splice(index - 1, 1);
 }
 
@@ -83,7 +94,14 @@ function stringifyContacts() {
 	localStorage.contacts = JSON.stringify(contacts);
 }
 
-
+function sortContacts() {
+	var key = $(this).data("sortby");
+	contacts = _.sortBy(contacts, function(o) {
+		return o[key];
+	});
+	updateContactList();
+	stringifyContacts();
+}
 
 
 
