@@ -8,6 +8,7 @@ function init() {
 	initializeLocalStorage();
 	updateContactList();
 	$('form').submit(addContact);
+	$('#contactList').on('click', '.delete', deleteContact);
 }
 
 function initializeLocalStorage() {
@@ -27,7 +28,7 @@ function updateContactList() {
 		$row.children('.name').text(contact.name);
 		$row.children('.tel').text(contact.tel);
 		$row.children('.email').text(contact.email);
-		$row.children('.addresss').text(contact.address);
+		$row.children('.address').text(contact.address);
 		return $row;
 	});
 	console.log($contacts);
@@ -36,11 +37,12 @@ function updateContactList() {
 
 function addContact(e) {
 	e.preventDefault();
-	var newContact = {};
-	newContact.name = $('#name').val();
-	newContact.tel = $('#tel').val();
-	newContact.email = $('#email').val();
-	newContact.address = $('#address').val();
+	var newContact = {
+		name: $('#name').val(),
+		tel: $('#tel').val(),
+		email: $('#email').val(),
+		address: $('#address').val()
+	}
 	addData(newContact);
 }
 
@@ -51,6 +53,22 @@ function addData(newContact) {
 	// $('#contactList').append($tr);
 }
 
+function deleteContact() {
+	var index = $(this).find('tr').index();
+	contacts.splice(index, 1)
+	updateContactList();
+	stringifyContacts();
+}
+
 function stringifyContacts() {
 	localStorage.contacts = JSON.stringify(contacts);
 }
+
+
+
+
+
+
+
+
+
