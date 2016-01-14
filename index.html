@@ -12,7 +12,7 @@
 		  <div class="form-group">
 		    <label class="col-sm-2 control-label">Contact Name</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="inputEmail3" placeholder="Jon Doe">
+		      <input type="text" class="form-control" id="name" placeholder="Jon Doe">
 		    </div>
 		  </div>
 		  <div class="form-group">
@@ -24,18 +24,18 @@
 		  <div class="form-group">
 		    <label class="col-sm-2 control-label">Email Address</label>
 		    <div class="col-sm-10">
-		      <input type="email" class="form-control" id="inputEmail3" placeholder="email@abc.com">
+		      <input type="email" class="form-control" id="email" placeholder="email@abc.com">
 		    </div>
 		  </div>
 		  <div class="form-group">
 		    <label class="col-sm-2 control-label">Home Address</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="inputPassword3" placeholder="123 main st. ">
+		      <input type="text" class="form-control" id="address" placeholder="123 main st. ">
 		    </div>
 		  </div>
 		  <div class="form-group">
 		    <div class="col-sm-offset-2 col-sm-10">
-		      <button type="submit" class="btn btn-default">Add Contanct</button>
+		      <button id="addContact" type="submit" class="btn btn-default">Add Contanct</button>
 		    </div>
 		  </div>
 		</form>
@@ -49,13 +49,12 @@
 				  	<th class="col-sm-3">Address</th>
 				  	<th class="col-sm-1">Edit</th>
 				  	<th class="col-sm-1">Delete</th>
-
 				  </tr>
 				</thead>
-				<tbody id="transactions">
+				<tbody id="contactList">
 					<tr id="template">
 						<td class="name"></td>
-						<td class="phone"></td>
+						<td class="tel"></td>
 						<td class="email"></td>
 						<td class="address"></td>
 						<td><a class="edit">Edit</a></td> 
