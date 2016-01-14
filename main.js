@@ -18,32 +18,39 @@ function initializeLocalStorage() {
 }
 
 function updateContactList() {
-	// console.log('list');
-	// var $contactList = $('#contactList');
-	// $contactList.empty();
-	// var $contacts = contacts.map(function(contact) {
-	// 	return $('<tr>').text(contact); // tr instead of li
-	// });
-	// $('#contactList').append($contacts);
+	var $contactList = $('#contactList');
+	$contactList = $contactList.children().not('#template').empty();
+	console.log($contactList);
+	var $contacts = contacts.map(function(contact, index) {
+		var $row = $('#template').clone();
+		$row.removeAttr('id');
+		$row.children('.name').text(contact.name);
+		$row.children('.tel').text(contact.tel);
+		$row.children('.email').text(contact.email);
+		$row.children('.addresss').text(contact.address);
+		return $row;
+	});
+	console.log($contacts);
+	$('#contactList').append($contacts);
 }
 
 function addContact(e) {
 	e.preventDefault();
-	console.log('added');
-	var $tr = $('#template').clone();
-	$tr.removeAttr('id');
-	$tr.children('.name').text($('#name').val());
-	$tr.children('.tel').text($('#tel').val());
-	$tr.children('.email').text($('#email').val());
-	$tr.children('.address').text($('#address').val());
-	// $tr.name = $('#name').val();
-	// $tr.phone = $('#tel').val();
-	// $tr.email = $('#email').val();
-	// $tr.address = $('#address').val();
-	appendRow($tr);
+	var newContact = {};
+	newContact.name = $('#name').val();
+	newContact.tel = $('#tel').val();
+	newContact.email = $('#email').val();
+	newContact.address = $('#address').val();
+	addData(newContact);
 }
 
-function appendRow($tr) {
-	$('#contactList').append($tr);
-	console.log($tr);
+function addData(newContact) {
+	contacts.push(newContact);
+	updateContactList();
+	stringifyContacts();
+	// $('#contactList').append($tr);
+}
+
+function stringifyContacts() {
+	localStorage.contacts = JSON.stringify(contacts);
 }
