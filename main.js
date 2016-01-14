@@ -11,7 +11,7 @@ function init() {
 	$('form').submit(addContact);
 	$('#contactList').on('click', '.delete', deleteContact);
 	$('#contactList').on('click', '.edit', editContact);
-	$('.sort').on('dblclick', sortContacts);
+	$('.sort').on('click', sortContacts);
 }
 
 function initializeLocalStorage() {

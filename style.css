@@ -1,3 +1,7 @@
+* {
+	color: #404040;
+}
+
 #template {
 	display: none;
 }
@@ -6,7 +10,34 @@
 	display: none;
 }
 
-a {
+.container-fluid {
+	margin-top: 50px;
+	width: 1130px;
+	background-color: #e0e0e0;
+	border: 3px solid #663300;
+}
+
+#contactTable {
+	padding-top: 5px;
+	padding-bottom: 20px;
+}
+
+hr {
+	border-width: 3px 0;
+	color:#663300;
+}
+
+h2 {
+	margin-top: -40px;
+	margin-left: 17px;
+}
+
+h3 {
+	margin-top: 20px;
+	margin-left: 22px;
+}
+
+a, .sort {
 	cursor: pointer;
 	
 }
@@ -21,4 +52,9 @@ a:hover {
 
 .edit {
 	color: #008800;
+}
+
+.table {
+	width: 95%;
+	margin: 0 auto;
 }
